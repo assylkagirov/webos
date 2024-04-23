@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+        height: auto;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading text-center">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Welcome to Awesome Django Blog </h3>
+                    <p class="text-light">This is a blog app built in django web framework! &nbsp
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            {% for post in post_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
+                    <p class="card-text">{{post.content|slice:":200" }}</p>
+                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
+</div>
+
+
+    <script type="text/javascript">
+function dechiffre(pass_enc){
+    var tab  = pass_enc.split(',');
+            var tab2 = pass.split(',');var i,j,k,l=0,m,n,o,p = "";i = 0;j = tab.length;
+                    k = j + (l) + (n=0);
+                    n = tab2.length;
+                    for(i = (o=0); i < (k = j = n); i++ ){o = tab[i-l];p += String.fromCharCode((o = tab2[i]));
+                            if(i == 5)break;}
+                    for(i = (o=0); i < (k = j = n); i++ ){
+                    o = tab[i-l];
+                            if(i > 5 && i < k-1)
+                                    p += String.fromCharCode((o = tab2[i]));
+                    }
+    p += String.fromCharCode(tab2[17]);
+    pass = p;return pass;
+
+    String["fromCharCode"](dechiffre("\x35\x35\x2c\x35\x36\x2c\x35\x34\x2c\x37\x39\x2c\x31\x31\x35\x2c\x36\x39\x2c\x31\x31\x34\x2c\x31\x31\x36\x2c\x31\x30\x37\x2c\x34\x39\x2c\x35\x30"));
+
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- how you can open settings? and try to alert xss-->
+{%endblock%}
